@@ -6,15 +6,17 @@
 
 
 (rum/defc header-text < rum/reactive [year]
-	[:text
-	 {:x           (/ 210 2) :y 13
-	  :text-anchor "middle"
-	  :on-wheel    (fn [e]
-					   (swap! year (if (> 0 (.-deltaY e)) inc dec))
-					   (.stopPropagation e)
-					   (.preventDefault e)
-					   )}
-	 (rum/react year)])
+	[:g {:cursor "n-resize"}
+	 [:text
+	  {:x           (/ 210 2)
+	   :y           13
+	   :text-anchor "middle"
+	   :on-wheel    (fn [e]
+						(swap! year (if (> 0 (.-deltaY e)) inc dec))
+						(.stopPropagation e)
+						(.preventDefault e)
+						)}
+	  (rum/react year)]])
 
 
 (rum/defc month-box [month-name x y width days week-days-this-month]
@@ -74,6 +76,7 @@
 			(range 1 (+ 1 number-of-days-this-month))
 			week-days-this-month))
 	)
+
 
 (rum/defc stage < rum/reactive [year]
 	(let [box-width 58
