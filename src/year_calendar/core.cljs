@@ -7,5 +7,11 @@
 
 (enable-console-print!)
 
+(defn- startup []
+	(rum/mount (view/stage year) (.getElementById js/document "year-calendar")))
 
-(rum/mount (view/stage year) (.getElementById js/document "year-calendar"))
+(if js/goog.DEBUG
+	(startup)
+	(set! js/app-year-calendar startup))
+
+

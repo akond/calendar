@@ -13,8 +13,8 @@
 	:target-path "target"
 	:resources-paths ["resources/public"]
 	:cljsbuild {
-
-				:builds [{:id           "year-calendar"
+				:builds [
+						 {:id           "year-calendar"
 						  :source-paths ["src"]
 						  :figwheel     true
 
@@ -24,7 +24,22 @@
 										 :asset-path           "cljs/out"
 										 :output-to            "resources/public/cljs/year_calendar.js"
 										 :output-dir           "resources/public/cljs/out"
-										 :source-map-timestamp true}}]}
+										 :source-map-timestamp true}}
+
+						 {:id           "release"
+						  :source-paths ["src"]
+						  :figwheel     false
+						  :compiler     {
+										 :main                 year-calendar.core
+										 :optimizations        :advanced
+										 :verbose              true
+										 :source-map           false
+										 :pretty-print         false
+										 :closure-defines      {"goog.DEBUG" false}
+										 :asset-path           "application/year-calendar"
+										 :output-to            "release/year_calendar.js"
+										 :output-dir           "release/"
+										 :source-map-timestamp false}}]}
 
 	:figwheel {:css-dirs
 			   ["resources/public/css"]
