@@ -33,11 +33,11 @@
 										 :main                 year-calendar.core
 										 :optimizations        :advanced
 										 :verbose              true
-										 :source-map           false
+										 :source-map           "release/calendar.map"
 										 :pretty-print         false
 										 :closure-defines      {"goog.DEBUG" false}
-										 :asset-path           "application/year-calendar"
-										 :output-to            "release/year_calendar.js"
+										 :asset-path           "application"
+										 :output-to            "release/calendar.js"
 										 :output-dir           "release/"
 										 :source-map-timestamp false}}]}
 

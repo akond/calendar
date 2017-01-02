@@ -1,17 +1,24 @@
 (ns year-calendar.core
 	(:require
 		[year-calendar.view :as view]
-		[rum.core :as rum]))
+		[rum.core :as rum])
+	(:import goog.cssom))
 
 (def year (atom (.getFullYear (js/Date.))))
 
 (enable-console-print!)
 
+(defn- disable-css []
+	(doall (map #(set! (.-disabled %) true) (goog.cssom.getAllCssStyleSheets))))
+
 (defn- startup []
-	(rum/mount (view/stage year) (.getElementById js/document "year-calendar")))
+	(disable-css)
+	(rum/mount (rum/with-key (view/stage year) @year) js/document.body)
+	false)
+
 
 (if js/goog.DEBUG
 	(startup)
-	(set! js/app-year-calendar startup))
+	(set! js/application-calendar startup))
 
 
